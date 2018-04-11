@@ -8,7 +8,9 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+//用来压缩css代码的
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+//用来压缩js代码的
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = require('../config/prod.env')
@@ -74,10 +76,13 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'dependency'
     }),
     // keep module.id stable when vender modules does not change
+    //会根据模块的相对路径生成一个四位数的hash作为模块id
     new webpack.HashedModuleIdsPlugin(),
     // enable scope hoisting
+    //可以预编译所有模块到一个包中，加快浏览器的运行速度
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
+    //拆分公共模块，vue里拆分了vendor,manifest和app三个模块
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks (module) {
@@ -119,7 +124,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 })
 
 if (config.build.productionGzip) {
-  const CompressionWebpackPlugin = require('compression-webpack-plugin')
+  const CompressionWebpackPlugin = require('compression-webpack-plugin')//gzip压缩
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
@@ -137,6 +142,7 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
+  //可以查看打包的具体情况，比如打了多少包，每个包多大等
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
