@@ -1,4 +1,8 @@
 'use strict'
+
+//build.js文件无非就是执行webpack.prod.conf.js文件，遇到错误时在命令行提示。
+//需要注意的是，build.js里引入了“rimraf”的包，它的作用是每次编译时清空dist文件，避免多次编译时造成文件夹的重复和混乱。
+
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
