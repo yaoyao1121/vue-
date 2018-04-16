@@ -73,7 +73,9 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,  //是否开启source-map
+    productionSourceMap: true,  //是否开启source-map  源映射 
+    // 源映射详情：  https://www.cnblogs.com/xuld/p/5882677.html
+    
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map', //webpack提供的用来方便调试的配置
 
